@@ -574,13 +574,13 @@
       <category term="ES6" scheme="http://atomjaylee.github.io/categories/ES6/"/>
     
     
-      <category term="javascript" scheme="http://atomjaylee.github.io/tags/javascript/"/>
-    
-      <category term="ES6" scheme="http://atomjaylee.github.io/tags/ES6/"/>
+      <category term="gulp" scheme="http://atomjaylee.github.io/tags/gulp/"/>
     
       <category term="webpack" scheme="http://atomjaylee.github.io/tags/webpack/"/>
     
-      <category term="gulp" scheme="http://atomjaylee.github.io/tags/gulp/"/>
+      <category term="javascript" scheme="http://atomjaylee.github.io/tags/javascript/"/>
+    
+      <category term="ES6" scheme="http://atomjaylee.github.io/tags/ES6/"/>
     
   </entry>
   
@@ -705,11 +705,11 @@
       <category term="Sass" scheme="http://atomjaylee.github.io/categories/Sass/"/>
     
     
-      <category term="webpack" scheme="http://atomjaylee.github.io/tags/webpack/"/>
+      <category term="sass" scheme="http://atomjaylee.github.io/tags/sass/"/>
     
       <category term="gulp" scheme="http://atomjaylee.github.io/tags/gulp/"/>
     
-      <category term="sass" scheme="http://atomjaylee.github.io/tags/sass/"/>
+      <category term="webpack" scheme="http://atomjaylee.github.io/tags/webpack/"/>
     
   </entry>
   
