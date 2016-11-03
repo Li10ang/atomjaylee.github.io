@@ -1,0 +1,23 @@
+menu:
+    Blog: /
+    Archive: /archives/
+    # Tag: /tags/
+    # Weibo: http://weibo.com/u/5535563708
+    GitHub: https://github.com/atomjaylee
+
+favicon: /logo.png
+logo: /favicon.png
+
+# Comment
+# e.g disqus: seansun
+disqus:
+duoshuo:
+
+# Analytics
+# google-analytics:
+ga: UA-65933410-1
+
+# Copyright Infomation
+startyear: 2015
+
+googlefonts: true
