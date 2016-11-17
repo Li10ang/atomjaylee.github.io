@@ -6,6 +6,6 @@ tags:
    - emoji
 ---
 
-> :fire:
+> emoji表情
 
 :fire:
