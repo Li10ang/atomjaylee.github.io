@@ -39,3 +39,5 @@ tags:
 
 
 > 如果你对 Git 感兴趣，可以通过[Pro Git](http://iissnan.com/progit/)这本书来学习,或者看阮一峰老师的 [常用 Git 命令清单](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html?utm_source=tool.lu)
+
+![](http://o9z96lbmh.bkt.clouddn.com/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.jpg)
