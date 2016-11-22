@@ -16,7 +16,7 @@ tags:
 
 ### 指令
 <!-- more -->
-- `v-for`指令  
+- `v-for`指令
   Vue1.x版本中使用的语法是`item in items`然后访问属性名和遍历索引值的时候分别使用`$key`和`$index`来获取，如下：
 
 
@@ -42,8 +42,8 @@ export default {
 }
 </script>
 ```
-在Vue2.0中不仅可以遍历数组，还可以遍历对象，当然也放弃了使用$index和$key的方式来获取遍历索引值和属性值。  
-1.遍历对象：语法`item in items`，`(item,key) in items`,`(item,key,index) in items`,**注意仅这三种，而且第二种和第三种必须按照这样的格式写，否则取不到遍历的索引值，只能取到属性值**
+在Vue2.0中不仅可以遍历数组，还可以遍历对象，当然也放弃了使用$index和$key的方式来获取遍历索引值和属性值。
+1.遍历对象：语法`item in items`，`(item,key) in items`,`(item,key,index) in items`,**第二个参数：属性名；第三个参数：索引值**
 ```html
 <template lang="html">
   <ul class="box">
