@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>JayLee | Blog</title>
+  <subtitle>Quick Note</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://atomjaylee.github.io/"/>
+  <updated>2016-11-22T12:44:04.279Z</updated>
+  <id>http://atomjaylee.github.io/</id>
+  
+  <author>
+    <name>Lee</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sticky Footer应用</title>
+    <link href="http://atomjaylee.github.io/2016/11/22/stickyFooter%E5%BA%94%E7%94%A8/"/>
+    <id>http://atomjaylee.github.io/2016/11/22/stickyFooter应用/</id>
+    <published>2016-11-22T19:45:22.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>我们有时候会遇到这样一个问题，就是当你的页面高度不够，但是你又想你的<code>foot</code>标签定在页面的最下面，一般我们会使用绝对定位的方式去实现，但是存在一个问题就是当我们浏览器的高度比较小的时候底部就会把内容遮盖住，这就比较尴尬了。现在使用Sticky Footer的方式实现一下(纯css)</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"wrap"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"main"</span> <span class="attr">class</span>=<span class="string">"clearfix"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"side"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"footer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<div class="tip"><br>    [注意] : 使用这个布局的前提，就是footer要在总的div容器之外，footer使用一个层，其它所有内容使用一个总的层。如果确实需要到添加其它同级层，那这个同级层就必须使用position:absolute进行绝对定位<br></div>
+
+<a id="more"></a>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>,</div><div class="line"><span class="selector-tag">body</span>,</div><div class="line"><span class="selector-id">#wrap</span> &#123;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-tag">body</span> &gt; <span class="selector-id">#wrap</span> &#123;</div><div class="line">    <span class="attribute">height</span>: auto;</div><div class="line">    <span class="attribute">min-height</span>: <span class="number">100%</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-id">#main</span> &#123;</div><div class="line">    <span class="attribute">padding-bottom</span>: <span class="number">80px</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="comment">/* 必须使用和footer相同的高度 */</span></div><div class="line">  <span class="selector-id">#footer</span> &#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">background</span>:red;</div><div class="line">    <span class="attribute">margin-top</span>: -<span class="number">80px</span>;</div><div class="line">    <span class="comment">/* footer高度的负值 */</span></div><div class="line">    <span class="attribute">height</span>: <span class="number">80px</span>;</div><div class="line">    <span class="attribute">clear</span>: both;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<div class="tip"><br>    [注意] : 主体是使用悬浮布局，还得解决一些浏览器的兼容问题，对#main部份进行著名的 Clearfix Hack<br></div>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">"."</span>;</div><div class="line">    <span class="attribute">display</span>: block;</div><div class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">clear</span>: both;</div><div class="line">    <span class="attribute">visibility</span>: hidden;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.clearfix</span> &#123;</div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* Hides from IE-mac \*/</span></div><div class="line"></div><div class="line">* <span class="selector-tag">html</span> <span class="selector-class">.clearfix</span> &#123;</div><div class="line">    <span class="attribute">height</span>: <span class="number">1%</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.clearfix</span> &#123;</div><div class="line">    <span class="attribute">display</span>: block;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* End hide from IE-mac */</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;我们有时候会遇到这样一个问题，就是当你的页面高度不够，但是你又想你的&lt;code&gt;foot&lt;/code&gt;标签定在页面的最下面，一般我们会使用绝对定位的方式去实现，但是存在一个问题就是当我们浏览器的高度比较小的时候底部就会把内容遮盖住，这就比较尴尬了。现在使用Sticky Footer的方式实现一下(纯css)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;wrap&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;main&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;clearfix&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;side&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;content&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;footer&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;div class=&quot;tip&quot;&gt;&lt;br&gt;    [注意] : 使用这个布局的前提，就是footer要在总的div容器之外，footer使用一个层，其它所有内容使用一个总的层。如果确实需要到添加其它同级层，那这个同级层就必须使用position:absolute进行绝对定位&lt;br&gt;&lt;/div&gt;
+    
+    </summary>
+    
+    
+      <category term="web" scheme="http://atomjaylee.github.io/tags/web/"/>
+    
+      <category term="css" scheme="http://atomjaylee.github.io/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gitmoji让github趣味多多</title>
+    <link href="http://atomjaylee.github.io/2016/11/17/gitmoji%E8%AE%A9github%E8%B6%A3%E5%91%B3%E5%A4%9A%E5%A4%9A/"/>
+    <id>http://atomjaylee.github.io/2016/11/17/gitmoji让github趣味多多/</id>
+    <published>2016-11-17T19:30:08.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>添加了 emoji 表情的提交记录真的能包含很多有用信息，阅读体验会更棒！！</p>
+</blockquote>
+<p align="center"><br>    <a href="https://gitmoji.carloscuesta.me" target="_blank" rel="external"><br>        <img src="https://cloud.githubusercontent.com/assets/7629661/20073135/4e3db2c2-a52b-11e6-85e1-661a8212045a.gif" width="456" alt="gitmoji"><br>    </a><br></p>
+
+<a id="more"></a>
+<p><img src="http://o9z96lbmh.bkt.clouddn.com/gitmoji_one.jpg" alt="one"><br><img src="http://o9z96lbmh.bkt.clouddn.com/gitmoji-two.jpg" alt="two"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;添加了 emoji 表情的提交记录真的能包含很多有用信息，阅读体验会更棒！！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;br&gt;    &lt;a href=&quot;https://gitmoji.carloscuesta.me&quot;&gt;&lt;br&gt;        &lt;img src=&quot;https://cloud.githubusercontent.com/assets/7629661/20073135/4e3db2c2-a52b-11e6-85e1-661a8212045a.gif&quot; width=&quot;456&quot; alt=&quot;gitmoji&quot;&gt;&lt;br&gt;    &lt;/a&gt;&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="github" scheme="http://atomjaylee.github.io/tags/github/"/>
+    
+      <category term="emoji" scheme="http://atomjaylee.github.io/tags/emoji/"/>
+    
+      <category term="逼格" scheme="http://atomjaylee.github.io/tags/%E9%80%BC%E6%A0%BC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>管理node和npm版本</title>
+    <link href="http://atomjaylee.github.io/2016/11/03/%E7%AE%A1%E7%90%86node%E5%92%8Cnpm%E7%89%88%E6%9C%AC/"/>
+    <id>http://atomjaylee.github.io/2016/11/03/管理node和npm版本/</id>
+    <published>2016-11-03T17:00:05.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="node的升级"><a href="#node的升级" class="headerlink" title="node的升级"></a>node的升级</h1><p>node的版本管理工具有两种，分别是n和nvm，可以对node无痛升级，其中n比较简单，简单介绍一下,<strong>n模块现在不支持windows系统，fuck</strong></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install -g n</div></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 安装最新版本node</span></div><div class="line">$ n latest</div><div class="line"><span class="comment"># 安装稳定版</span></div><div class="line">$ n stable</div><div class="line"><span class="comment"># 安装指定版本</span></div><div class="line">$ n 0.10.1</div><div class="line"><span class="comment"># 删除某个版本</span></div><div class="line">$ n rm 0.10.1</div><div class="line"><span class="comment"># 使用指定得版本</span></div><div class="line">$ n use 0.10.1</div></pre></td></tr></table></figure>
+<h1 id="npm升级"><a href="#npm升级" class="headerlink" title="npm升级"></a>npm升级</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install npm -g</div></pre></td></tr></table></figure>
+<h1 id="npm安装模块"><a href="#npm安装模块" class="headerlink" title="npm安装模块"></a>npm安装模块</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 强制安装，因为当你执行安装命令时，如果node_modules目录中如果已经存在该模块，就不再重新安装，即使远程仓库已经存在新版本</span></div><div class="line">npm install &lt;packagename&gt; -<span class="_">-f</span></div><div class="line"><span class="comment"># 查看模块版本号</span></div><div class="line">npm view &lt;packagename&gt; versions</div><div class="line"><span class="comment"># 安装指定版本号</span></div><div class="line">npm install &lt;packagename&gt;@xxx</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;node的升级&quot;&gt;&lt;a href=&quot;#node的升级&quot; class=&quot;headerlink&quot; title=&quot;node的升级&quot;&gt;&lt;/a&gt;node的升级&lt;/h1&gt;&lt;p&gt;node的版本管理工具有两种，分别是n和nvm，可以对node无痛升级，其中n比较简单，简单介绍一下
+    
+    </summary>
+    
+    
+      <category term="node" scheme="http://atomjaylee.github.io/tags/node/"/>
+    
+      <category term="npm" scheme="http://atomjaylee.github.io/tags/npm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>博客的持续部署问题</title>
+    <link href="http://atomjaylee.github.io/2016/11/03/%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%8C%81%E7%BB%AD%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/"/>
+    <id>http://atomjaylee.github.io/2016/11/03/博客的持续部署问题/</id>
+    <published>2016-11-03T12:34:50.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<p>当你使用hexo搭建完自己的博客后，可能会有这样的疑问，如果我想写文章但是当时搭建环境的电脑并不在身边怎么办，那么需要你构建一个虚拟的’后台系统’<br>这篇文章只说重点，那么你需要注意一下几点：</p>
+<h2 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h2><p>1.持续化集成，持续交付，持续部署是什么？  看这篇文章<a href="http://www.jianshu.com/p/2c6ebe34744a" target="_blank" rel="external">谈谈持续集成，持续交付，持续部署之间的区别</a>;<br>答：白话一下：持续化集成：就是在一个虚拟机中，运行你需要跑的命令(eg:vue的npm run dev等)，然后等成你想要的东西。持续化交付：就是将你生成的东西a传到目标b那去(eg：github-repo)。持续部署：就是将你的目标b，部署到预演环境（XXXXX.github.io)</p>
+<p>2.travis ci和flow ci是什么？<br>答：其实他们都是负责持续集成和持续部署的工具，比如flow ci标题是这样写的<code>Hosted Continuous Integration and Delivery Service</code>,翻译是<code>托管连续集成和交付服务</code>。其中flow ci是刚刚出来的，现在还处于beta阶段（我也是刚申请到内测权限），目前阶段是不收费的，我觉得正式发布后，可能和travis ci收费机制相同，基础功能还是免费的。  </p>
+<p>3.travis和flow实现的是持续集成和持续交付，那自动部署呢？<br>答：我们使用hexo+github来搭建博客系统，就是部署环节。</p>
+<a id="more"></a>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>1.Travis ci/flow ci.<br>2.github 的 token<br>3.github 博客所在的仓库</p>
+<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><h3 id="travis-ci"><a href="#travis-ci" class="headerlink" title="travis ci"></a>travis ci</h3><p>1.拿到token：<br><img src="http://o9z96lbmh.bkt.clouddn.com/%E6%8B%BF%E5%88%B0token.png" alt=""><br>然后点击按钮<code>Generate new token</code>，拿到token，记录下来，因为只出现一次<br>2.设置travis：<br>登录<a href="https://travis-ci.org/" target="_blank" rel="external">官网</a>,利用github来登录<br><img src="http://o9z96lbmh.bkt.clouddn.com/travis1.png" alt=""><br><img src="http://o9z96lbmh.bkt.clouddn.com/travis2.png" alt=""><br>3.设置.travis.yml文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">language: node_js</div><div class="line">node_js: stable</div><div class="line"><span class="comment"># S: Build Lifecycle</span></div><div class="line">install:</div><div class="line">  - npm install</div><div class="line"><span class="comment">#before_script:</span></div><div class="line"> <span class="comment"># - npm install -g gulp</span></div><div class="line">cache:</div><div class="line">  directories:</div><div class="line">    - node_modules</div><div class="line"></div><div class="line">script:</div><div class="line">  - hexo g</div><div class="line">after_script:</div><div class="line">  - <span class="built_in">cd</span> ./public</div><div class="line">  - git init</div><div class="line">  - git config user.name <span class="string">"atomjaylee"</span></div><div class="line">  - git config user.email <span class="string">"908105576@qq.com"</span></div><div class="line">  - git add .</div><div class="line">  - git commit -m <span class="string">"Update docs"</span></div><div class="line">  - git push --force --quiet <span class="string">"https://<span class="variable">$&#123;GH_TOKEN&#125;</span>@<span class="variable">$&#123;GH_REF&#125;</span>"</span> master:master</div><div class="line"><span class="comment"># E: Build LifeCycle</span></div><div class="line">branches:</div><div class="line">  only:</div><div class="line">    - <span class="built_in">source</span></div><div class="line">env:</div><div class="line"> global:</div><div class="line">   - GH_REF: github.com/atomjaylee/atomjaylee.github.io.git</div></pre></td></tr></table></figure></p>
+<p>最后，当你把你的新文章提交到source分支的时候，他自己就会自动部署完成。</p>
+<h3 id="flow-ci"><a href="#flow-ci" class="headerlink" title="flow ci"></a>flow ci</h3><p>flow ci和travis ci差不多<br><img src="http://o9z96lbmh.bkt.clouddn.com/flow1.png" alt=""><br>然后在<code>Custom Script</code>中，设置和<code>.travis.yml</code>文件中相同的配置，就可以了  </p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>现在我们可以异地<code>git clone</code>下博客源码分支，然后添加文章之后上传，flow/travis 就能监测到你的代码变化，自动进行集成，交付最后部署到xxx.github.io的网址上去。至此完成</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当你使用hexo搭建完自己的博客后，可能会有这样的疑问，如果我想写文章但是当时搭建环境的电脑并不在身边怎么办，那么需要你构建一个虚拟的’后台系统’&lt;br&gt;这篇文章只说重点，那么你需要注意一下几点：&lt;/p&gt;
+&lt;h2 id=&quot;理论&quot;&gt;&lt;a href=&quot;#理论&quot; class=&quot;headerlink&quot; title=&quot;理论&quot;&gt;&lt;/a&gt;理论&lt;/h2&gt;&lt;p&gt;1.持续化集成，持续交付，持续部署是什么？  看这篇文章&lt;a href=&quot;http://www.jianshu.com/p/2c6ebe34744a&quot;&gt;谈谈持续集成，持续交付，持续部署之间的区别&lt;/a&gt;;&lt;br&gt;答：白话一下：持续化集成：就是在一个虚拟机中，运行你需要跑的命令(eg:vue的npm run dev等)，然后等成你想要的东西。持续化交付：就是将你生成的东西a传到目标b那去(eg：github-repo)。持续部署：就是将你的目标b，部署到预演环境（XXXXX.github.io)&lt;/p&gt;
+&lt;p&gt;2.travis ci和flow ci是什么？&lt;br&gt;答：其实他们都是负责持续集成和持续部署的工具，比如flow ci标题是这样写的&lt;code&gt;Hosted Continuous Integration and Delivery Service&lt;/code&gt;,翻译是&lt;code&gt;托管连续集成和交付服务&lt;/code&gt;。其中flow ci是刚刚出来的，现在还处于beta阶段（我也是刚申请到内测权限），目前阶段是不收费的，我觉得正式发布后，可能和travis ci收费机制相同，基础功能还是免费的。  &lt;/p&gt;
+&lt;p&gt;3.travis和flow实现的是持续集成和持续交付，那自动部署呢？&lt;br&gt;答：我们使用hexo+github来搭建博客系统，就是部署环节。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="blog" scheme="http://atomjaylee.github.io/tags/blog/"/>
+    
+      <category term="travis ci" scheme="http://atomjaylee.github.io/tags/travis-ci/"/>
+    
+      <category term="flow ci" scheme="http://atomjaylee.github.io/tags/flow-ci/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vueTab切换</title>
+    <link href="http://atomjaylee.github.io/2016/10/19/vueTab%E5%88%87%E6%8D%A2/"/>
+    <id>http://atomjaylee.github.io/2016/10/19/vueTab切换/</id>
+    <published>2016-10-19T10:20:11.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习东西只有边学边做才有效率，遇不到坑就成长不了，今天看了看<a href="http://element.eleme.io/#/" target="_blank" rel="external">Element UI</a>得文档，对他的Tab功能实践一下：<br><img src="http://o9z96lbmh.bkt.clouddn.com/Vue_Tab" alt="gif"></p>
+<a id="more"></a>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"nav"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in items"</span> <span class="attr">v-on:click</span>=<span class="string">"bottomline(index)"</span> <span class="attr">v-bind:class</span>=<span class="string">"&#123; active: item.flag &#125;"</span> <span class="attr">v-bind:index</span>=<span class="string">"index"</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>1.Vue2.js中v-for指令的改变<br>2.盒子的属性不能使用<code>Mustache</code>语法<br>3.动态的class绑定需要使用v-bind来绑定<br>4.将<code>index</code>作为参数，传递给点击方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  data () &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">items</span>:[</div><div class="line">        &#123; <span class="attr">flag</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="string">'指南'</span>&#125;,</div><div class="line">        &#123; <span class="attr">flag</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="string">'组件'</span>&#125;,</div><div class="line">        &#123; <span class="attr">flag</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="string">'资源'</span>&#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">computed</span>: &#123;&#125;,</div><div class="line">  mounted () &#123;&#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    <span class="attr">bottomline</span>: <span class="function"><span class="keyword">function</span>(<span class="params">index</span>)</span>&#123;</div><div class="line">      <span class="keyword">this</span>.items.map(<span class="function"><span class="keyword">function</span> (<span class="params">v,i</span>) </span>&#123;</div><div class="line">        i==index? v.flag=<span class="number">1</span>: v.flag=<span class="number">0</span>;</div><div class="line">    &#125;);</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">components</span>: &#123;&#125;</div><div class="line">&#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+<p>这里使用了<code>Array.map()</code>方法，其中<code>v</code>是当前元素的值，<code>i</code>是当期元素的索引值。然后去和传进来的index参数比较。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习东西只有边学边做才有效率，遇不到坑就成长不了，今天看了看&lt;a href=&quot;http://element.eleme.io/#/&quot;&gt;Element UI&lt;/a&gt;得文档，对他的Tab功能实践一下：&lt;br&gt;&lt;img src=&quot;http://o9z96lbmh.bkt.clouddn.com/Vue_Tab&quot; alt=&quot;gif&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>favicon.ico的使用</title>
+    <link href="http://atomjaylee.github.io/2016/10/17/favicon-ico%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://atomjaylee.github.io/2016/10/17/favicon-ico的使用/</id>
+    <published>2016-10-17T12:35:39.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<p>为了美观和提升企业的宣传，我们往往需要在网页的title位置，将企业的logo或者其他的象征性的图标放上去，就像这样：<br><img src="http://o9z96lbmh.bkt.clouddn.com/favicon.png" alt="favicon"></p>
+<a id="more"></a>
+<h2 id="部署方法"><a href="#部署方法" class="headerlink" title="部署方法"></a>部署方法</h2><p>1.将favicon.icon文件放到根目录下（或者是image文件夹下）<br>2.在页面中在header位置添加<code>meta</code>声明<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- href中是favicon.ico文件的相对位置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"./img/favicon.ico"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"bookmark"</span> <span class="attr">href</span>=<span class="string">"./img/favicon.ico"</span> <span class="attr">type</span>=<span class="string">"image/x-icon"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当然如果你希望使用动态的图标也可以这样：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- href中是favicon.ico文件的相对位置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">href</span>=<span class="string">"./img/favicon.gif"</span> <span class="attr">type</span>=<span class="string">"image/gif"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>3.图标的大小：普通的尺寸有16x16,32x32,64x64,128x128设置还有512x512.但是在实际的测试中，这个文件最好不要超过4K，所以选择32x32大小的，因为尺寸大了效果并不会见涨，还会影响了网站的速度<br>4.图标的制作，先用做出png格式的图片，然后在<a href="http://www.easyicon.net/covert/" target="_blank" rel="external">http://www.easyicon.net/covert/</a>上通过上传转换。</p>
+<p><strong>网站使用ico图标后，在用户使用收藏夹收藏网页的时候，收藏夹中显示的是使用ico图标</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了美观和提升企业的宣传，我们往往需要在网页的title位置，将企业的logo或者其他的象征性的图标放上去，就像这样：&lt;br&gt;&lt;img src=&quot;http://o9z96lbmh.bkt.clouddn.com/favicon.png&quot; alt=&quot;favicon&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="web" scheme="http://atomjaylee.github.io/tags/web/"/>
+    
+      <category term="favicon" scheme="http://atomjaylee.github.io/tags/favicon/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue-router2踩坑</title>
+    <link href="http://atomjaylee.github.io/2016/10/11/Vue-router2%E8%B8%A9%E5%9D%91/"/>
+    <id>http://atomjaylee.github.io/2016/10/11/Vue-router2踩坑/</id>
+    <published>2016-10-11T11:59:50.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>最近Vue作者更新了vue-cli，这个问题已经不存在，不过也不排除可能会出现，以备查阅</p>
+<hr>
+<p><del>本篇文章也可以是2016-10-10的笔记，之前Vue.js2没有升级的时候曾使用过Vue-router@0.7.13版本实验过路由功能，今天再使用Vue-router2实验时各种报错，在这里说明一下</del></p>
+<blockquote>
+<p>Vue-router2只适用Vue.js2+版本，所以要在Vue.js1.x版本使用Vue-router，必须使用@0.7.13版本的，否则不适用。<br>现在使用npm install Vue和npm install Vue-router安装时都是默认安装的2.0版本的，如果需要更改版本可以在package.json更改版本然后npm install<br>也可以先使用<code>npm view packname versions</code>来查看这个包的版本，然后使用<code>npm install packname@xxx</code>来通过版本号安装</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p><del>按照Vue-router2的<a href="http://router.vuejs.org/zh-cn/essentials/getting-started.html" target="_blank" rel="external">文档</a>来试验，但是还是会报错，这里需要：（App.vue+main.js）</del><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  router,</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App) <span class="comment">//这里需要使用render函数，否则会报错</span></div><div class="line">&#125;).$mount(<span class="string">'#app'</span>)</div></pre></td></tr></table></figure></p>
+<p><del>但是这样还是会报错：</del></p>
+<div class="tip"><br>    [Vue warn] : You are using the runtime-only build of Vue where the template option is not available. Either pre-compile the templates into render functions, or use the compiler-included build. (found in root instance)<br></div>
+
+<p><del>这就懵逼了，这篇<a href="https://segmentfault.com/a/1190000006435886" target="_blank" rel="external">文章</a>给出了答案，先上图后解释：</del><br><img src="http://o9z96lbmh.bkt.clouddn.com/Vue2-template-render" alt="render"></p>
+<p><del>这里先说一下Vue最早会打包成三个文件，一个是 runtime only 的文件 vue.common.js，一个是 compiler only 的文件 compiler.js，一个是 runtime + compiler 的文件 vue.js。也就是说<code>vue.js = vue.common.js + compiler.js</code>,而从图中可以发现在运行时构建时是不支持<code>template</code>选项的，而要想支持template选项必须使用<code>compiler.js</code>这个文件，这时候你会发现，在使用vue-cli构建出来的build文件夹中<code>webpack.base.conf.js</code>文件中</del><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">    <span class="attr">extensions</span>: [<span class="string">''</span>, <span class="string">'.js'</span>, <span class="string">'.vue'</span>],</div><div class="line">    <span class="attr">fallback</span>: [path.join(__dirname, <span class="string">'../node_modules'</span>)],</div><div class="line">    <span class="attr">alias</span>: &#123;</div><div class="line">      <span class="string">'vue'</span>: <span class="string">'vue/dist/vue.common.js'</span>, <span class="comment">//调用的是vue.common.js,而不是Vue.js,这就比较尴尬了......</span></div><div class="line">      <span class="string">'src'</span>: path.resolve(__dirname, <span class="string">'../src'</span>),</div><div class="line">      <span class="string">'assets'</span>: path.resolve(__dirname, <span class="string">'../src/assets'</span>),</div><div class="line">      <span class="string">'components'</span>: path.resolve(__dirname, <span class="string">'../src/components'</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;,</div></pre></td></tr></table></figure></p>
+<p><del>所以需要需改成：</del><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">    <span class="attr">extensions</span>: [<span class="string">''</span>, <span class="string">'.js'</span>, <span class="string">'.vue'</span>],</div><div class="line">    <span class="attr">fallback</span>: [path.join(__dirname, <span class="string">'../node_modules'</span>)],</div><div class="line">    <span class="attr">alias</span>: &#123;</div><div class="line">      <span class="string">'vue'</span>: <span class="string">'vue/dist/vue.js'</span>,</div><div class="line">      <span class="string">'src'</span>: path.resolve(__dirname, <span class="string">'../src'</span>),</div><div class="line">      <span class="string">'assets'</span>: path.resolve(__dirname, <span class="string">'../src/assets'</span>),</div><div class="line">      <span class="string">'components'</span>: path.resolve(__dirname, <span class="string">'../src/components'</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;,</div></pre></td></tr></table></figure></p>
+<p><del>这就Ok了。追根溯源，完美！！<br>当然Vue-router2(<a href="http://vuefe.cn/router/" target="_blank" rel="external">文档</a>)也更新了许多的东西，在这里就不说明了，后面会专门再写一篇博客，一边学习一边总结，生命不息，折腾不止，加油。</del></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;最近Vue作者更新了vue-cli，这个问题已经不存在，不过也不排除可能会出现，以备查阅&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;del&gt;本篇文章也可以是2016-10-10的笔记，之前Vue.js2没有升级的时候曾使用过Vue-router@0.7.13版本实验过路由功能，今天再使用Vue-router2实验时各种报错，在这里说明一下&lt;/del&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Vue-router2只适用Vue.js2+版本，所以要在Vue.js1.x版本使用Vue-router，必须使用@0.7.13版本的，否则不适用。&lt;br&gt;现在使用npm install Vue和npm install Vue-router安装时都是默认安装的2.0版本的，如果需要更改版本可以在package.json更改版本然后npm install&lt;br&gt;也可以先使用&lt;code&gt;npm view packname versions&lt;/code&gt;来查看这个包的版本，然后使用&lt;code&gt;npm install packname@xxx&lt;/code&gt;来通过版本号安装&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="Vue.js" scheme="http://atomjaylee.github.io/tags/Vue-js/"/>
+    
+      <category term="Vue-router2" scheme="http://atomjaylee.github.io/tags/Vue-router2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>升级博客主题(Vue.js)</title>
+    <link href="http://atomjaylee.github.io/2016/10/11/%E5%8D%87%E7%BA%A7%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98-Vue-js/"/>
+    <id>http://atomjaylee.github.io/2016/10/11/升级博客主题-Vue-js/</id>
+    <published>2016-10-11T11:15:09.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天在<a href="http://gold.xitu.io/" target="_blank" rel="external">掘金</a>上看到了关于<a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank" rel="external">Vue官网主题</a>的<code>Hexo-theme</code>，所以一到公司就上手试一下，替换掉之前的Next主题。顺便对这套主题文档中的使用方法做一下实验。<br><a id="more"></a></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装本主题需要的依赖包：<code>npm install --save hexo-renderer-jade hexo-generator-feed hexo-generator-sitemap hexo-browsersync hexo-generator-archive</code><br>之后执行<code>git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo</code>将主题克隆到theme文件夹中<br>然后修改<code>_config.yml</code>的<code>theme</code>配置项为<code>apollo</code>，再进入<code>cd themes/apollo</code>执行<code>git pull</code>即可完成安装。</p>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>1.标题部分，本主题只支持一级标题和二级标题，加n个<code>###</code>不起作用<br>2.页面中可以设置mete description信息，可以加强网站SEO，有两种方式，第一是markdown文件头部添加<code>desc</code>配置，填写关键字和描述。第二种是在<code>scaffolds</code>文件中将<code>desc</code>配置到模板中<br>3.文章摘要和Next主题相同，都是使用<code>&lt;!--more--&gt;</code>来进行注释<br>4.警告块(和Vue中的一样)，需要使用div块和tip类名：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tip"</span>&gt;</span></div><div class="line">    预处理器很强大，但它只是编写 CSS 的辅助工具。出于对扩展和维护等方面的考虑，在大型项目中有必要使用预处理器构建 CSS；但是对于小型项目，原生的 CSS 可能是一种更好的选择。不要肆意使用预处理器！</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<div class="tip"><br>    预处理器很强大，但它只是编写 CSS 的辅助工具。出于对扩展和维护等方面的考虑，在大型项目中有必要使用预处理器构建 CSS；但是对于小型项目，原生的 CSS 可能是一种更好的选择。不要肆意使用预处理器！<br></div>
+
+<p>掘金中还有一篇<a href="http://blog.naaln.com/2016/07/hexo-with-algolia/" target="_blank" rel="external">文章</a>是使用Algolia来给博客添加本站搜索功能，可是本主题使用jade作处理，尝试未成功！以后再做尝试。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天在&lt;a href=&quot;http://gold.xitu.io/&quot;&gt;掘金&lt;/a&gt;上看到了关于&lt;a href=&quot;https://github.com/pinggod/hexo-theme-apollo&quot;&gt;Vue官网主题&lt;/a&gt;的&lt;code&gt;Hexo-theme&lt;/code&gt;，所以一到公司就上手试一下，替换掉之前的Next主题。顺便对这套主题文档中的使用方法做一下实验。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Vue主题" scheme="http://atomjaylee.github.io/tags/Vue%E4%B8%BB%E9%A2%98/"/>
+    
+      <category term="hexo-theme" scheme="http://atomjaylee.github.io/tags/hexo-theme/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&#39;vue2.0更新&#39;</title>
+    <link href="http://atomjaylee.github.io/2016/10/08/vue2-0%E6%9B%B4%E6%96%B0/"/>
+    <id>http://atomjaylee.github.io/2016/10/08/vue2-0更新/</id>
+    <published>2016-10-08T15:55:07.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>Vue.js 2.0在近期已经发布了，相关的中文翻译正在进行中，自己在这里一边学习一边做一些总结，方便今后动作的查阅。</p>
+</blockquote>
+<ol>
+<li><a href="http://vuefe.cn/" target="_blank" rel="external">Vue2.0中文文档</a></li>
+<li><a href="http://vuejs.org/guide/" target="_blank" rel="external">Vue2.0官方原版</a></li>
+<li><a href="http://router.vuejs.org/zh-cn/index.html" target="_blank" rel="external">Vue-router2.0中文文档</a></li>
+<li><a href="http://vuex.vuejs.org/en/index.html" target="_blank" rel="external">Vuex2.0英文文档</a></li>
+</ol>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><a id="more"></a>
+<ul>
+<li><code>v-for</code>指令<br>Vue1.x版本中使用的语法是<code>item in items</code>然后访问属性名和遍历索引值的时候分别使用<code>$key</code>和<code>$index</code>来获取，如下：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">lang</span>=<span class="string">"html"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"item in items"</span>&gt;</span>&#123;&#123;$index&#125;&#125;:&#123;&#123;$key&#125;&#125;:&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">items</span>:&#123;</div><div class="line">        <span class="attr">name</span>:<span class="string">'Atomjaylee'</span>,</div><div class="line">        <span class="attr">age</span>:<span class="number">24</span>,</div><div class="line">        <span class="attr">num</span>:<span class="string">'001'</span>,</div><div class="line">        <span class="attr">phone</span>:<span class="string">'12345678901'</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在Vue2.0中不仅可以遍历数组，还可以遍历对象，当然也放弃了使用$index和$key的方式来获取遍历索引值和属性值。<br>1.遍历对象：语法<code>item in items</code>，<code>(item,key) in items</code>,<code>(item,key,index) in items</code>,<strong>第二个参数：属性名；第三个参数：索引值</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">lang</span>=<span class="string">"html"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item,key,index) in items"</span>&gt;</span>&#123;&#123;index&#125;&#125;-&#123;&#123;key&#125;&#125;-&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">items</span>:&#123;</div><div class="line">        <span class="attr">name</span>:<span class="string">'Atomjaylee'</span>,</div><div class="line">        <span class="attr">age</span>:<span class="number">24</span>,</div><div class="line">        <span class="attr">num</span>:<span class="string">'001'</span>,</div><div class="line">        <span class="attr">phone</span>:<span class="string">'12345678901'</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>2.遍历数组：语法<code>item in items</code>和<code>(item,index) in items</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">lang</span>=<span class="string">"html"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in items"</span>&gt;</span>&#123;&#123;index&#125;&#125;-&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">items</span>:[</div><div class="line">        &#123;<span class="attr">name</span>: <span class="string">'张三'</span>, <span class="attr">num</span>: <span class="string">'1111111'</span>&#125;,</div><div class="line">        &#123;<span class="attr">name</span>: <span class="string">'李四'</span>, <span class="attr">num</span>: <span class="string">'2222222'</span>&#125;,</div><div class="line">        &#123;<span class="attr">name</span>: <span class="string">'麻五'</span>, <span class="attr">num</span>: <span class="string">'3333333'</span>&#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Vue.js 2.0在近期已经发布了，相关的中文翻译正在进行中，自己在这里一边学习一边做一些总结，方便今后动作的查阅。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://vuefe.cn/&quot;&gt;Vue2.0中文文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://vuejs.org/guide/&quot;&gt;Vue2.0官方原版&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://router.vuejs.org/zh-cn/index.html&quot;&gt;Vue-router2.0中文文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://vuex.vuejs.org/en/index.html&quot;&gt;Vuex2.0英文文档&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;指令&quot;&gt;&lt;a href=&quot;#指令&quot; class=&quot;headerlink&quot; title=&quot;指令&quot;&gt;&lt;/a&gt;指令&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="Vue.js" scheme="http://atomjaylee.github.io/categories/Vue-js/"/>
+    
+    
+      <category term="vue.js" scheme="http://atomjaylee.github.io/tags/vue-js/"/>
+    
+      <category term="Vue2.0" scheme="http://atomjaylee.github.io/tags/Vue2-0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>移动端倒计时(坑)</title>
+    <link href="http://atomjaylee.github.io/2016/09/26/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%80%92%E8%AE%A1%E6%97%B6-%E5%9D%91/"/>
+    <id>http://atomjaylee.github.io/2016/09/26/移动端倒计时-坑/</id>
+    <published>2016-09-26T20:05:46.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>记今天遇到的bug,倒计时在移动端(微信页面)上运行的时候，当页面被打开，手机锁屏的时候，倒计时的Js代码会滞后甚至停止</p>
+</blockquote>
+<p>之前的代码:</p>
+<a id="more"></a>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>分</div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>秒</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">time</span>(<span class="params">val1,val2</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> min = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"span"</span>)[<span class="number">0</span>];</div><div class="line">        <span class="keyword">var</span> sec = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"span"</span>)[<span class="number">1</span>];</div><div class="line">        <span class="keyword">var</span> t = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            val2--;</div><div class="line">            <span class="keyword">if</span>(val2&lt;<span class="number">0</span>)&#123;</div><div class="line">                val2==<span class="number">59</span>;</div><div class="line">                val1 --;</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(val1==<span class="number">0</span>&amp;&amp;val2==<span class="number">0</span>)&#123;</div><div class="line">                clearInterval(t)</div><div class="line">            &#125;</div><div class="line">            min.innerText = val1;</div><div class="line">            sec.innerText = val2;</div><div class="line">        &#125;,<span class="number">1000</span>)</div><div class="line">    &#125;</div><div class="line">    time(<span class="number">0</span>,<span class="number">10</span>);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>之后的代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>分</div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>秒</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">time</span>(<span class="params">val1,val2</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> min = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"span"</span>)[<span class="number">0</span>];</div><div class="line">        <span class="keyword">var</span> sec = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"span"</span>)[<span class="number">1</span>];</div><div class="line">        <span class="keyword">var</span> a = <span class="built_in">parseInt</span>(val1*<span class="number">60</span>+val2); <span class="comment">//传入的剩余秒数</span></div><div class="line">        <span class="keyword">var</span> render = <span class="built_in">parseInt</span>(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime()/<span class="number">1000</span>)+a;<span class="comment">//倒计时停止的秒数</span></div><div class="line">        <span class="keyword">var</span> t = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="keyword">var</span> new_val = render-<span class="built_in">parseInt</span>(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime()/<span class="number">1000</span>);<span class="comment">//实时的时间差</span></div><div class="line">            <span class="keyword">var</span> num1 = <span class="built_in">parseInt</span>(new_val/<span class="number">60</span>);<span class="comment">//获得分钟数</span></div><div class="line">            <span class="keyword">var</span> num2 = <span class="built_in">parseInt</span>(new_val%<span class="number">60</span>);<span class="comment">//获得秒数</span></div><div class="line">            <span class="keyword">if</span>(num1==<span class="number">0</span>&amp;&amp;num2==<span class="number">-1</span>)&#123;</div><div class="line">                clearInterval(t)</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                min.innerText = num1;</div><div class="line">                sec.innerText = num2;</div><div class="line">            &#125;</div><div class="line">        &#125;,<span class="number">1000</span>)</div><div class="line">    &#125;</div><div class="line">    time(<span class="number">0</span>,<span class="number">10</span>);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>前后的代码差别就是，之前的代码时间逻辑自己书写，包括秒数的跳动和时间单位的转化，后面的是将逻辑让程序换算。导致在移动端手机锁屏的时候出现时间误差，后面则不会，因为时间都是实时获取到的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;记今天遇到的bug,倒计时在移动端(微信页面)上运行的时候，当页面被打开，手机锁屏的时候，倒计时的Js代码会滞后甚至停止&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;之前的代码:&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="mobile" scheme="http://atomjaylee.github.io/categories/mobile/"/>
+    
+    
+      <category term="mobile" scheme="http://atomjaylee.github.io/tags/mobile/"/>
+    
+      <category term="倒计时" scheme="http://atomjaylee.github.io/tags/%E5%80%92%E8%AE%A1%E6%97%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>github部署网站</title>
+    <link href="http://atomjaylee.github.io/2016/09/26/github%E9%83%A8%E7%BD%B2%E7%BD%91%E7%AB%99/"/>
+    <id>http://atomjaylee.github.io/2016/09/26/github部署网站/</id>
+    <published>2016-09-26T13:46:49.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>将自己开发的网站部署到网络上，不仅能够方便快捷的查看，还能提升自己的逼格，哈哈。之前我一直使用百度开放云来部署自己的网站，以便于在应聘的时候能派的上用场，但是他是收费平台，平均一天3毛左右，虽然不多，但是时间一长也是一笔不小的开支</p>
+</blockquote>
+<p>之前的在博客中也使用’github’+’Hexo’来开发了自己的博客，那么今天也利用github来部署一下自己开发的一些小项目</p>
+<a id="more"></a>
+<ol>
+<li>在自己的github中新建有一个库，名字随意</li>
+<li>点击’setting’–GitHub Pages选项中点击’Lanunch automatic generator’–填写项目的名字–点击’Continue to layouts’–进入主题选择页面，直接选择’Publish page’–返回setting，GitHub Pages选项中的’Source’,默认是gh-pages,切换到master分支</li>
+<li>然后上传自己的静态资源(里面必须有index.html)，访问’Username.github.io/库的名字’,就能访问到了。</li>
+</ol>
+<blockquote>
+<p>只能部署静态资源的页面，动态资源的网站还是乖乖的使用百度开放云或者阿里云等系列的平台吧</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;将自己开发的网站部署到网络上，不仅能够方便快捷的查看，还能提升自己的逼格，哈哈。之前我一直使用百度开放云来部署自己的网站，以便于在应聘的时候能派的上用场，但是他是收费平台，平均一天3毛左右，虽然不多，但是时间一长也是一笔不小的开支&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;之前的在博客中也使用’github’+’Hexo’来开发了自己的博客，那么今天也利用github来部署一下自己开发的一些小项目&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="日常折腾" scheme="http://atomjaylee.github.io/categories/%E6%97%A5%E5%B8%B8%E6%8A%98%E8%85%BE/"/>
+    
+    
+      <category term="github" scheme="http://atomjaylee.github.io/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&#39;螺旋仪HTML5&#39;</title>
+    <link href="http://atomjaylee.github.io/2016/09/20/%E8%9E%BA%E6%97%8B%E4%BB%AAHTML5/"/>
+    <id>http://atomjaylee.github.io/2016/09/20/螺旋仪HTML5/</id>
+    <published>2016-09-20T14:29:37.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>之前的淘宝造物节的AR效果让人为之惊叹，最近看见大漠前辈在微信公众号上推送了两篇关于陀螺仪相关的文章，所以写一下读后感</p>
+</blockquote>
+<p>陀螺仪的使用是调用了HTML5的orientation,用来检测只能设备的运动方向，在移动端开发中能给用户带来良好的体验(控制游戏，手势识别，地图)； <strong>兼容性</strong>：移动设备现在无非是IOS和安卓系统，wp系统其实不是太常见，IOS系统&gt;=7.1;Android&gt;=4.0;兼容性还是相当不错的。</p>
+<a id="more"></a>
+<p><strong>坐标系</strong>：即笛卡尔坐标系，包括有，x(aplha),y(beta),z(gamma)三个坐标系， <img src="http://o9z96lbmh.bkt.clouddn.com/DeviceOrientation-4.png" alt="">; aplha:数值0到360度；beta:-180到180度；gamma：-90到90度；</p>
+<p><strong>使用方法</strong>：使用方法和onclick时间相同，需要先测试一下设备是否已经支持orientation</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.DeviceOrientationEvent) &#123;</div><div class="line">  <span class="comment">//  支持DeviceOrientation API写在这里</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">"对不起，您的浏览器还不支持Device Orientation!!!"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Alpha &amp; Beta &amp; Gamma<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,minimum-scale=1,maximum-scale=1"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">media</span>=<span class="string">"screen"</span>&gt;</span><span class="css"></span></div><div class="line">    <span class="selector-tag">html</span>,</div><div class="line">    <span class="selector-tag">body</span> &#123;</div><div class="line">        <span class="attribute">margin</span>: <span class="number">0</span>;</div><div class="line">        <span class="attribute">padding</span>: <span class="number">0</span>;</div><div class="line">        <span class="attribute">width</span>: <span class="number">100vw</span>;</div><div class="line">        <span class="attribute">height</span>: <span class="number">100vh</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="selector-id">#myCanvas</span> &#123;</div><div class="line">        <span class="attribute">margin</span>: <span class="number">20px</span> auto;</div><div class="line">        <span class="attribute">position</span>: absolute;</div><div class="line">        <span class="attribute">top</span>: <span class="number">50%</span>;</div><div class="line">        <span class="attribute">left</span>: <span class="number">50%</span>;</div><div class="line">        <span class="attribute">-webkit-transform</span>: <span class="built_in">translate3d</span>(-50%, -50%, 0);</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(-50%, -50%, 0);</div><div class="line">    &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span> <span class="attr">width</span>=<span class="string">"360"</span> <span class="attr">height</span>=<span class="string">"450"</span> <span class="attr">style</span>=<span class="string">"border:1px solid #d3d3d3;"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">deviceOrientationListener</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">"myCanvas"</span>);</div><div class="line">        <span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</div><div class="line">        ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, c.width, c.height);</div><div class="line">        ctx.fillStyle = <span class="string">"#FF7777"</span>;</div><div class="line">        ctx.font = <span class="string">"14px Verdana"</span>;</div><div class="line">        ctx.fillText(<span class="string">"Alpha:"</span> + <span class="built_in">Math</span>.round(event.alpha), <span class="number">10</span>, <span class="number">20</span>);</div><div class="line">        ctx.beginPath();</div><div class="line">        ctx.moveTo(<span class="number">180</span>, <span class="number">75</span>);</div><div class="line">        ctx.lineTo(<span class="number">210</span>, <span class="number">75</span>);</div><div class="line">        ctx.arc(<span class="number">180</span>, <span class="number">75</span>, <span class="number">60</span>, <span class="number">0</span>, event.alpha * <span class="built_in">Math</span>.PI / <span class="number">180</span>);</div><div class="line">        ctx.fill();</div><div class="line"></div><div class="line">        ctx.fillStyle = <span class="string">"#FF6600"</span>;</div><div class="line">        ctx.fillText(<span class="string">"Beta:"</span> + <span class="built_in">Math</span>.round(event.beta), <span class="number">10</span>, <span class="number">140</span>);</div><div class="line">        ctx.beginPath();</div><div class="line">        ctx.fillRect(<span class="number">180</span>, <span class="number">150</span>, event.beta, <span class="number">90</span>);</div><div class="line"></div><div class="line">        ctx.fillStyle = <span class="string">"#FF0000"</span>;</div><div class="line">        ctx.fillText(<span class="string">"Gamma:"</span> + <span class="built_in">Math</span>.round(event.gamma), <span class="number">10</span>, <span class="number">270</span>);</div><div class="line">        ctx.beginPath();</div><div class="line">        ctx.fillRect(<span class="number">90</span>, <span class="number">340</span>, <span class="number">180</span>, event.gamma);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.DeviceOrientationEvent) &#123;</div><div class="line">        <span class="built_in">window</span>.addEventListener(<span class="string">"deviceorientation"</span>, deviceOrientationListener);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        alert(<span class="string">"Sorry, your browser doesn't support Device Orientation"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>也可以扫描下面的二维码在手机上实时查看<br><img src="http://o9z96lbmh.bkt.clouddn.com/DeviceOrientation-10.png" alt="png"></p>
+<p>这里特别推荐一下淘宝造物节作者的github<a href="https://github.com/shrekshrek?tab=overview&amp;from=2016-08-01&amp;to=2016-08-31&amp;utf8=✓" target="_blank" rel="external">地址</a>;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;之前的淘宝造物节的AR效果让人为之惊叹，最近看见大漠前辈在微信公众号上推送了两篇关于陀螺仪相关的文章，所以写一下读后感&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;陀螺仪的使用是调用了HTML5的orientation,用来检测只能设备的运动方向，在移动端开发中能给用户带来良好的体验(控制游戏，手势识别，地图)； &lt;strong&gt;兼容性&lt;/strong&gt;：移动设备现在无非是IOS和安卓系统，wp系统其实不是太常见，IOS系统&amp;gt;=7.1;Android&amp;gt;=4.0;兼容性还是相当不错的。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="mobile 日常折腾" scheme="http://atomjaylee.github.io/categories/mobile-%E6%97%A5%E5%B8%B8%E6%8A%98%E8%85%BE/"/>
+    
+    
+      <category term="移动端" scheme="http://atomjaylee.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+      <category term="HTML5" scheme="http://atomjaylee.github.io/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>工作流备份</title>
+    <link href="http://atomjaylee.github.io/2016/09/19/%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%A4%87%E4%BB%BD/"/>
+    <id>http://atomjaylee.github.io/2016/09/19/工作流备份/</id>
+    <published>2016-09-19T10:33:59.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>每个前端工作人员都拥有适合自己的开发工具和工作流程，这里为了方便以后的使用，对自己使用的工作流做一个简单的备份</p>
+</blockquote>
+<a id="more"></a>
+<ol>
+<li><strong>切片</strong>:其实我们平时的切图片并不是所谓的“切图”，切图其实是根据设计稿使用合理的代码将其呈现出来，但对于切片确实也是一个比较麻烦的过程，这里推荐使用<a href="http://www.cutterman.cn/zh/cutterman" target="_blank" rel="external">Cutterman</a>;官网上有有详细的使用说明。</li>
+<li><strong>尺寸标注</strong>：每次写一个元素,都需要去使用PS去量，确实是比较麻烦，在这里推荐两个神器，<a href="http://www.biaonimeia.com/" target="_blank" rel="external">标你妹</a>，是一个团队合作的工具，将Psd文件上传即可自动量取。<a href="https://www.zeplin.io/" target="_blank" rel="external">Zepin</a>,是基于ps画板的工具，要求ps2015 cc版本及以上版本。并且有自己的客户端(Mac和window版本)。</li>
+<li><strong>编辑器</strong>：webstorm是前端工具的老大，不多说，在这里只推荐一个主题插件<a href="https://github.com/ChrisRM/material-theme-jetbrains" target="_blank" rel="external">material-theme</a>;Atom是github发布的编辑器，样子好看，插件功能强大，这里推荐几个常用的插件：</li>
+</ol>
+<ul>
+<li><a href="https://github.com/Glavin001/atom-beautify" target="_blank" rel="external">atom-beautify</a>用于美化代码，快捷键ctrl+alt+B</li>
+<li><a href="https://atom.io/packages/atom-html-preview" target="_blank" rel="external">atom-html-preview</a>html代码实时预览，热加载</li>
+<li><a href="https://atom.io/packages/atom-ternjs" target="_blank" rel="external">atom-ternjs</a> Javascript代码提醒功能</li>
+<li><a href="https://atom.io/packages/autocomplete-modules" target="_blank" rel="external">autocomplete-modules</a> 在使用require的时候直接提示已安装的插件包名字，十分的方便</li>
+<li><a href="https://atom.io/packages/autocomplete-paths" target="_blank" rel="external">autocomplete-paths</a> 在引入文件的时候能都及时的提醒文件的路径</li>
+<li><a href="https://atom.io/packages/emmet" target="_blank" rel="external">emmet</a> emmet语法，前端写html必备</li>
+<li><a href="https://atom.io/packages/file-icons" target="_blank" rel="external">file-icons</a> 对文件的图标进行美化，让人爱不释手</li>
+<li><a href="https://atom.io/packages/git-time-machine" target="_blank" rel="external">git-time-machine</a> 对进行的git操作进行记录，形成UI视图，牛的一批；<br>-<a href="https://atom.io/packages/highlight-selected" target="_blank" rel="external">highlight-selected</a> 当选择一个元素时候，和他相同的元素也会点亮<br>-<a href="https://atom.io/packages/language-vue" target="_blank" rel="external">language-vue</a> Vue书写插件</li>
+<li><a href="https://atom.io/packages/linter" target="_blank" rel="external">linter</a>+<a href="https://atom.io/packages/linter-csslint" target="_blank" rel="external">linter-csslint</a>+<a href="https://atom.io/packages/linter-eslint" target="_blank" rel="external">linter-eslint</a>+<a href="https://atom.io/packages/linter-htmlhint" target="_blank" rel="external">linter-htmlhint</a>+<a href="https://atom.io/packages/linter-sass-lint" target="_blank" rel="external">linter-sass-lint</a>让书写的代码更加的规范，完美</li>
+<li><a href="https://atom.io/packages/minimap" target="_blank" rel="external">minimap</a>小地图，能都快速的定位</li>
+<li><a href="https://atom.io/packages/open-in-browsers" target="_blank" rel="external">open-in-browsers</a>快速的将html文件在浏览器中打开</li>
+<li><a href="https://atom.io/packages/pigments" target="_blank" rel="external">pigments</a>将设定的颜色显示出来，快捷的定位颜色值，也能转化颜色值</li>
+<li><a href="https://atom.io/packages/regex-railroad-diagram" target="_blank" rel="external">regex-railroad-diagram</a> 将你写的正则表达式用UI视图的方式表现出来</li>
+<li><a href="https://atom.io/packages/platformio-ide-terminal" target="_blank" rel="external">platformio-ide-terminal</a>在编辑器中使用命令行工具进行相关的操作</li>
+</ul>
+<ol>
+<li>图片的压缩：<a href="https://tinypng.com/" target="_blank" rel="external">tinypng</a>特别牛逼的一个压缩图片的网站；</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;每个前端工作人员都拥有适合自己的开发工具和工作流程，这里为了方便以后的使用，对自己使用的工作流做一个简单的备份&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://atomjaylee.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="工具" scheme="http://atomjaylee.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="备份" scheme="http://atomjaylee.github.io/tags/%E5%A4%87%E4%BB%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&#39;预加载和懒加载&#39;</title>
+    <link href="http://atomjaylee.github.io/2016/09/05/%E9%A2%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E6%87%92%E5%8A%A0%E8%BD%BD/"/>
+    <id>http://atomjaylee.github.io/2016/09/05/预加载和懒加载/</id>
+    <published>2016-09-05T16:06:01.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li><strong>图片的预加载和懒加载</strong><ul>
+<li>预加载:就是用户还没有访问到这个页面的时候，先将后面的内容加载到缓存中，提升用户的体验。（一般用在多页的幻灯片页面中)</li>
+<li>懒加载:就是当页面被请求时，不将所有的资源同时加载进来，而是当用户访问到这一页的时候才将资源加载进来。（适用于比较长且多图片的网页中）</li>
+<li>插件: <a href="http://createjs.com/preloadjs" target="_blank" rel="external"><em>预加载</em></a>   <a href="http://www.appelsiini.net/projects/lazyload" target="_blank" rel="external"><em>懒加载</em></a></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;图片的预加载和懒加载&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;预加载:就是用户还没有访问到这个页面的时候，先将后面的内容加载到缓存中，提升用户的体验。（一般用在多页的幻灯片页面中)&lt;/li&gt;
+&lt;li&gt;懒加载:就是当页面被请求时，不将所有的资源同时加载进
+    
+    </summary>
+    
+      <category term="web" scheme="http://atomjaylee.github.io/categories/web/"/>
+    
+    
+      <category term="web" scheme="http://atomjaylee.github.io/tags/web/"/>
+    
+      <category term="工具" scheme="http://atomjaylee.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&#39;移动端常用技巧&#39;</title>
+    <link href="http://atomjaylee.github.io/2016/09/05/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
+    <id>http://atomjaylee.github.io/2016/09/05/移动端常用技巧/</id>
+    <published>2016-09-05T15:45:16.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<blockquote>
+<p>单行文字超出，省略号</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">  <span class="attribute">overflow</span>: hidden;</div><div class="line">  <span class="attribute">text-overflow</span>: ellipsis;</div><div class="line">  <span class="attribute">white-space</span>: nowrap;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>禁止长按时下载图片</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.css</span>&#123;</div><div class="line">  <span class="attribute">-webkit-touch-callout</span>:none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>禁止文本选择</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.div</span>&#123;</div><div class="line">  <span class="attribute">-moz-user-select</span>:none;</div><div class="line">  <span class="attribute">-webkit-user-select</span>:none;</div><div class="line">  <span class="attribute">-ms-user-select</span>:none;</div><div class="line">  <span class="attribute">-khtml-user-select</span>:none;</div><div class="line">  <span class="attribute">user-select</span>:none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>IOS惯性滚动</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;</div><div class="line">  <span class="attribute">-webkit-overflow-scrolling</span>:touch <span class="meta">!important</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>字体细长</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.div</span>&#123;</div><div class="line">  <span class="attribute">-webkit-font-smoothing</span>: antialiased;</div><div class="line">  <span class="attribute">-moz-osx-font-smoothing</span>: grayscale;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>横向滚动</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.div</span>&#123;</div><div class="line">  <span class="attribute">white-space</span>: nowrap;</div><div class="line">  <span class="attribute">overflow-x</span>: auto;</div><div class="line">  <span class="attribute">overflow-y</span>: hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>去除IOS和Ipad上的input默认圆角</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:not(</span><span class="selector-attr">[type="radio"]</span>)<span class="selector-pseudo">:not(</span><span class="selector-attr">[type="checkbox"]</span>)&#123;</div><div class="line">  <span class="attribute">-webkit-appearance</span>: none;</div><div class="line"> <span class="attribute">border-radius</span>: <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>发短信，发邮件。但是在winPhone上无效</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"sms:10086"</span>&gt;</span>发短信给10086<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"mailto:908105576@qq.com"</span>&gt;</span>给我发邮件<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>定制点击输入框后键盘出现的样式,自己选一个</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"tel/email/url/number/search.."</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>meta基础知识</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 不识别页面中的数字为电话号码 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"telephone=no"</span> /&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 忽略Android平台对邮箱地址的识别 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"email=no"</span> /&gt;</span></div><div class="line">  <span class="comment">&lt;!-- 将winphone系统的a,input标签点击时产生半透明灰色背景去除 --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-tap-highlight"</span> <span class="attr">content</span>=<span class="string">"no"</span>&gt;</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;单行文字超出，省略号&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;div&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;overflow&lt;/span&gt;: hidden;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;text-overflow&lt;/span&gt;: ellipsis;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;white-space&lt;/span&gt;: nowrap;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;禁止长按时下载图片&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;selector-class&quot;&gt;.css&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;-webkit-touch-callout&lt;/span&gt;:none;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;禁止文本选择&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="mobile css" scheme="http://atomjaylee.github.io/categories/mobile-css/"/>
+    
+    
+      <category term="css" scheme="http://atomjaylee.github.io/tags/css/"/>
+    
+      <category term="mobile" scheme="http://atomjaylee.github.io/tags/mobile/"/>
+    
+      <category term="移动端" scheme="http://atomjaylee.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&#39;禁止微信webview调整字体大小&#39;</title>
+    <link href="http://atomjaylee.github.io/2016/09/05/%E7%A6%81%E6%AD%A2%E5%BE%AE%E4%BF%A1webview%E8%B0%83%E6%95%B4%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F/"/>
+    <id>http://atomjaylee.github.io/2016/09/05/禁止微信webview调整字体大小/</id>
+    <published>2016-09-05T15:42:33.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="往常我们写的页面如果在微信中手动调节了字体了大小，那就-sweat-smile-了"><a href="#往常我们写的页面如果在微信中手动调节了字体了大小，那就-sweat-smile-了" class="headerlink" title="往常我们写的页面如果在微信中手动调节了字体了大小，那就:sweat_smile:了"></a>往常我们写的页面如果在微信中手动调节了字体了大小，那就:sweat_smile:了</h3><ul>
+<li>微信中内置了调节字体大小的功能<img src="http://o9z96lbmh.bkt.clouddn.com/resize_font.png" alt="调节字体的大小"></li>
+</ul>
+<p>一调节就会让页面的布局出错。</p>
+<a id="more"></a>
+<ul>
+<li>解决方案：<ul>
+<li>iOS 版的调整字体大小使用的是通过给 body 设置 -webkit-text-size-adjust:120% 属性实现的</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line"><span class="attribute">-webkit-text-size-adjust</span>: <span class="number">100%</span> <span class="meta">!important</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Android 则是通过 Java 调用 webview 的 API 设置字体大小，需要通过 WeixinJSBridge 对象将网页的字体大小设置为默认大小，并且重写设置字体大小的方法，让用户不能在该网页下设置字体大小。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> WeixinJSBridge == <span class="string">"object"</span> &amp;&amp; <span class="keyword">typeof</span> WeixinJSBridge.invoke == <span class="string">"function"</span>) &#123;</div><div class="line">		handleFontSize();</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">if</span> (<span class="built_in">document</span>.addEventListener) &#123;</div><div class="line">				<span class="built_in">document</span>.addEventListener(<span class="string">"WeixinJSBridgeReady"</span>, handleFontSize, <span class="literal">false</span>);</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.attachEvent) &#123;</div><div class="line">				<span class="built_in">document</span>.attachEvent(<span class="string">"WeixinJSBridgeReady"</span>, handleFontSize);</div><div class="line">				<span class="built_in">document</span>.attachEvent(<span class="string">"onWeixinJSBridgeReady"</span>, handleFontSize);</div><div class="line">		&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFontSize</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="comment">// 设置网页字体为默认大小</span></div><div class="line">		WeixinJSBridge.invoke(<span class="string">'setFontSizeCallback'</span>, &#123; <span class="string">'fontSize'</span> : <span class="number">0</span> &#125;);</div><div class="line">		<span class="comment">// 重写设置网页字体大小的事件</span></div><div class="line">		WeixinJSBridge.on(<span class="string">'menu:setfont'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">				WeixinJSBridge.invoke(<span class="string">'setFontSizeCallback'</span>, &#123; <span class="string">'fontSize'</span> : <span class="number">0</span> &#125;);</div><div class="line">		&#125;);</div><div class="line">&#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：安卓下如用户之前已经设置过字体大小，本方法会先按照用户设置的大小显示，然后再跳转回正常的样式</p>
+</blockquote>
+<p><img src="http://o9z96lbmh.bkt.clouddn.com/resize_font_android.gif" alt="gif"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;往常我们写的页面如果在微信中手动调节了字体了大小，那就-sweat-smile-了&quot;&gt;&lt;a href=&quot;#往常我们写的页面如果在微信中手动调节了字体了大小，那就-sweat-smile-了&quot; class=&quot;headerlink&quot; title=&quot;往常我们写的页面如果在微信中手动调节了字体了大小，那就:sweat_smile:了&quot;&gt;&lt;/a&gt;往常我们写的页面如果在微信中手动调节了字体了大小，那就:sweat_smile:了&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;微信中内置了调节字体大小的功能&lt;img src=&quot;http://o9z96lbmh.bkt.clouddn.com/resize_font.png&quot; alt=&quot;调节字体的大小&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一调节就会让页面的布局出错。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="mobile" scheme="http://atomjaylee.github.io/categories/mobile/"/>
+    
+    
+      <category term="mobile" scheme="http://atomjaylee.github.io/tags/mobile/"/>
+    
+      <category term="移动端" scheme="http://atomjaylee.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>&#39;移动端手机横屏提醒&#39;</title>
+    <link href="http://atomjaylee.github.io/2016/09/05/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%89%8B%E6%9C%BA%E6%A8%AA%E5%B1%8F%E6%8F%90%E9%86%92/"/>
+    <id>http://atomjaylee.github.io/2016/09/05/移动端手机横屏提醒/</id>
+    <published>2016-09-05T15:40:44.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="开发手机端页面后如果用户由竖屏转化成了横屏，那么样式上可能会出现偏差，所以需要我们在用户屏幕旋转的时候提醒用户切换到竖屏的形式"><a href="#开发手机端页面后如果用户由竖屏转化成了横屏，那么样式上可能会出现偏差，所以需要我们在用户屏幕旋转的时候提醒用户切换到竖屏的形式" class="headerlink" title="开发手机端页面后如果用户由竖屏转化成了横屏，那么样式上可能会出现偏差，所以需要我们在用户屏幕旋转的时候提醒用户切换到竖屏的形式"></a>开发手机端页面后如果用户由竖屏转化成了横屏，那么样式上可能会出现偏差，所以需要我们在用户屏幕旋转的时候提醒用户切换到竖屏的形式</h2><blockquote>
+<p><code>window.onorientationchange</code>能监测到屏幕方向是否发生变化</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">	<span class="built_in">window</span>.onorientationchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="keyword">switch</span> (<span class="built_in">window</span>.orientation) &#123;</div><div class="line">			<span class="keyword">case</span> <span class="number">-90</span>:</div><div class="line">				alert(<span class="string">"为了提高体验，请您切换到竖屏查看页面"</span>);</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> <span class="number">90</span>:</div><div class="line">				alert(<span class="string">"为了提高体验，请您切换到竖屏查看页面"</span>);</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> <span class="number">0</span>:</div><div class="line">				alert(<span class="string">"竖屏:"</span> + <span class="built_in">window</span>.orientation);</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> <span class="number">180</span>:</div><div class="line">				alert(<span class="string">"竖屏:"</span> + <span class="built_in">window</span>.orientation);</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*在竖屏时候的样式*/</span></div><div class="line">@<span class="keyword">media</span> all and (orientation:portrait) &#123;</div><div class="line">	<span class="selector-class">.css</span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*在横屏时候的样式*/</span></div><div class="line">@<span class="keyword">media</span> all and (orientation:landscape) &#123;</div><div class="line">	<span class="selector-class">.css</span>&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;开发手机端页面后如果用户由竖屏转化成了横屏，那么样式上可能会出现偏差，所以需要我们在用户屏幕旋转的时候提醒用户切换到竖屏的形式&quot;&gt;&lt;a href=&quot;#开发手机端页面后如果用户由竖屏转化成了横屏，那么样式上可能会出现偏差，所以需要我们在用户屏幕旋转的时候提醒用户切换
+    
+    </summary>
+    
+      <category term="mobile" scheme="http://atomjaylee.github.io/categories/mobile/"/>
+    
+    
+      <category term="mobile" scheme="http://atomjaylee.github.io/tags/mobile/"/>
+    
+      <category term="移动端" scheme="http://atomjaylee.github.io/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webapck/gulp 搭建ES6环境</title>
+    <link href="http://atomjaylee.github.io/2016/08/16/webapck-gulp-%E6%90%AD%E5%BB%BAES6%E7%8E%AF%E5%A2%83/"/>
+    <id>http://atomjaylee.github.io/2016/08/16/webapck-gulp-搭建ES6环境/</id>
+    <published>2016-08-16T12:20:04.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>Es6出现之后越来越多的人使用，它是对ES6的升华和查漏补缺，阮一峰老师ES6的也出了相关的教程–<a href="http://es6.ruanyifeng.com" target="_blank" rel="external">《ECMAScript 6 入门》</a></p>
+</blockquote>
+<p><em>但是Es6的支持性并不是那么好，所以需要使用<a href="http://babeljs.cn" target="_blank" rel="external">编译器</a>编译成es5的语法</em><br><a id="more"></a></p>
+<h4 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a><strong>gulp</strong></h4><blockquote>
+<p>条件：安装gulp,gulp-babel,babel-preset-es2015,babel-preset-stage-3/2/1</p>
+</blockquote>
+<p>1.新建<code>.babelrc</code>文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"presets"</span>: [</div><div class="line">    <span class="string">"es2015"</span>,</div><div class="line">    <span class="string">"stage-3"</span></div><div class="line">  ],</div><div class="line">  <span class="string">"plugins"</span>: []</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.gulpfile.js文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>)</div><div class="line"><span class="keyword">var</span> babel = <span class="built_in">require</span>(<span class="string">'gulp-babel'</span>)</div><div class="line"></div><div class="line">gulp.task(<span class="string">'default'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'./main.js'</span>)</div><div class="line">  .pipe(babel(&#123;<span class="attr">presets</span>: [<span class="string">'es2015'</span>]&#125;))</div><div class="line">  .pipe(gulp.dest(<span class="string">'./dist'</span>))</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h4 id="webapck"><a href="#webapck" class="headerlink" title="webapck"></a><strong>webapck</strong></h4><blockquote>
+<p>条件：webpack babel-loader babel-preset-es2015,babel-preset-stage-3/2/1</p>
+</blockquote>
+<p>1.新建<code>.babelrc</code>文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"presets"</span>: [</div><div class="line">    <span class="string">"es2015"</span>,</div><div class="line">    <span class="string">"stage-3"</span></div><div class="line">  ],</div><div class="line">  <span class="string">"plugins"</span>: []</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.webpack.config.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="attr">entry</span>:<span class="string">'./main.js'</span>,</div><div class="line">  <span class="attr">output</span>:&#123;</div><div class="line">    <span class="attr">path</span>:<span class="string">'./dist'</span>,</div><div class="line">    <span class="attr">filename</span>:<span class="string">'bundle.js'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">module</span>:&#123;</div><div class="line">    <span class="attr">loaders</span>:[&#123;<span class="attr">test</span>:<span class="regexp">/\.js/</span>,<span class="attr">loader</span>:<span class="string">'babel'</span>&#125;]</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Es6出现之后越来越多的人使用，它是对ES6的升华和查漏补缺，阮一峰老师ES6的也出了相关的教程–&lt;a href=&quot;http://es6.ruanyifeng.com&quot;&gt;《ECMAScript 6 入门》&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;em&gt;但是Es6的支持性并不是那么好，所以需要使用&lt;a href=&quot;http://babeljs.cn&quot;&gt;编译器&lt;/a&gt;编译成es5的语法&lt;/em&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="ES6" scheme="http://atomjaylee.github.io/categories/ES6/"/>
+    
+    
+      <category term="javascript" scheme="http://atomjaylee.github.io/tags/javascript/"/>
+    
+      <category term="ES6" scheme="http://atomjaylee.github.io/tags/ES6/"/>
+    
+      <category term="webpack" scheme="http://atomjaylee.github.io/tags/webpack/"/>
+    
+      <category term="gulp" scheme="http://atomjaylee.github.io/tags/gulp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在指定的文件夹下打开命令行</title>
+    <link href="http://atomjaylee.github.io/2016/08/12/%E5%9C%A8%E6%8C%87%E5%AE%9A%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E6%89%93%E5%BC%80%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
+    <id>http://atomjaylee.github.io/2016/08/12/在指定的文件夹下打开命令行/</id>
+    <published>2016-08-12T11:58:35.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;前端工作中，总是需要cmd进入某个文件后执行命令，如<code>npm install webpack --save-dev</code>等命令，常规的方法中只能通过<code>cd ...</code>等一连串的命令才能进入，今天提供两种方式方便快捷的进入指定的文件夹下打开命令行工具。</p>
+<a id="more"></a>
+<blockquote>
+<p>方法1： 进入指点的文件夹后，按住<code>shift</code>键，右击鼠标后会出现 <strong>‘在此处打开命令窗口’</strong>，点击后即可进入。</p>
+</blockquote>
+<p><em>本方法缺点是不能以管理员的身份运行</em></p>
+<blockquote>
+<p>方法2：如果你还是说嫌这个太麻烦，并且不能以管理员的身份运行，请使用方法2</p>
+</blockquote>
+<ul>
+<li>新建文本，然后将下面代码复制进去</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">Windows Registry Editor Version <span class="number">5.00</span></div><div class="line"></div><div class="line">; Created by: Shawn Brink</div><div class="line"></div><div class="line">; http:<span class="comment">//www.sevenforums.com</span></div><div class="line"></div><div class="line">; Tutorial: http:<span class="comment">//www.sevenforums.com/tutorials/47415-open-command-window-here-administrator.html</span></div><div class="line"></div><div class="line">[-HKEY_CLASSES_ROOT\Directory\shell\runas]</div><div class="line"></div><div class="line">[HKEY_CLASSES_ROOT\Directory\shell\runas]</div><div class="line"></div><div class="line">@=<span class="string">"Open cmd here as Admin"</span></div><div class="line"></div><div class="line"><span class="string">"HasLUAShield"</span>=<span class="string">""</span></div><div class="line"></div><div class="line">[HKEY_CLASSES_ROOT\Directory\shell\runas\command]</div><div class="line"></div><div class="line">@=<span class="string">"cmd.exe /s /k pushd \"%V\""</span></div><div class="line"></div><div class="line">[-HKEY_CLASSES_ROOT\Directory\Background\shell\runas]</div><div class="line"></div><div class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\runas]</div><div class="line"></div><div class="line">@=<span class="string">"Open cmd here as Admin"</span></div><div class="line"></div><div class="line"><span class="string">"HasLUAShield"</span>=<span class="string">""</span></div><div class="line"></div><div class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\runas\command]</div><div class="line"></div><div class="line">@=<span class="string">"cmd.exe /s /k pushd \"%V\""</span></div><div class="line"></div><div class="line">[-HKEY_CLASSES_ROOT\Drive\shell\runas]</div><div class="line"></div><div class="line">[HKEY_CLASSES_ROOT\Drive\shell\runas]</div><div class="line"></div><div class="line">@=<span class="string">"Open cmd here as Admin"</span></div><div class="line"></div><div class="line"><span class="string">"HasLUAShield"</span>=<span class="string">""</span></div><div class="line"></div><div class="line">[HKEY_CLASSES_ROOT\Drive\shell\runas\command]</div><div class="line"></div><div class="line">@=<span class="string">"cmd.exe /s /k pushd \"%V\""</span></div></pre></td></tr></table></figure>
+<p>然后修改为cmd.reg文件，双击运行，此时在文件夹下右击就回出现<code>Open cmd here as Admin</code>点击就能以管理员的身份打开命令行</p>
+<blockquote>
+<p>如果哪一天你想去掉这个功能，也相同的道理，新建文件，复制下面的代码，更改后缀名为.reg文件，双击运行….</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Windows Registry Editor Version <span class="number">5.00</span></div><div class="line"></div><div class="line">; Created by: Shawn Brink</div><div class="line"></div><div class="line">; http:<span class="comment">//www.sevenforums.com</span></div><div class="line"></div><div class="line">; Tutorial: http:<span class="comment">//www.sevenforums.com/tutorials/47415-open-command-window-here-administrator.html</span></div><div class="line"></div><div class="line">[-HKEY_CLASSES_ROOT\Directory\shell\runas]</div><div class="line"></div><div class="line">[-HKEY_CLASSES_ROOT\Directory\Background\shell\runas]</div><div class="line"></div><div class="line">[-HKEY_CLASSES_ROOT\Drive\shell\runas]</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;前端工作中，总是需要cmd进入某个文件后执行命令，如&lt;code&gt;npm install webpack --save-dev&lt;/code&gt;等命令，常规的方法中只能通过&lt;code&gt;cd ...&lt;/code&gt;等一连串的命令才能进入，今天提供两种方式方便快捷的进入指定的文件夹下打开命令行工具。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="逼格" scheme="http://atomjaylee.github.io/categories/%E9%80%BC%E6%A0%BC/"/>
+    
+    
+      <category term="cmd" scheme="http://atomjaylee.github.io/tags/cmd/"/>
+    
+      <category term="window" scheme="http://atomjaylee.github.io/tags/window/"/>
+    
+      <category term="命令行" scheme="http://atomjaylee.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>360自动使用极速模式</title>
+    <link href="http://atomjaylee.github.io/2016/08/09/360%E8%87%AA%E5%8A%A8%E4%BD%BF%E7%94%A8%E6%9E%81%E9%80%9F%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://atomjaylee.github.io/2016/08/09/360自动使用极速模式/</id>
+    <published>2016-08-09T17:11:59.000Z</published>
+    <updated>2016-11-22T12:44:04.279Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在国产的浏览器也是越来越多，360安全浏览器，360极速浏览器，Uc浏览器等，他们都有一个特点就是采用了‘双核’</p>
+<blockquote>
+<p>‘双核’：“极速模式”和”兼容模式”<br>–极速模式：采用的是谷歌的wekit内核，速度快<br>–兼容模式：采用的是IE的内核，兼容性好(不知道为什么兼容性好，就是为了访问支付宝网银？)</p>
+</blockquote>
+<p>我们希望在这样的双核浏览器中能直接调用极速模式，将网页快速的打开<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--360浏览器--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"renderer"</span> <span class="attr">content</span>=<span class="string">"webkit"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--其它双核浏览器--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"force-rendering"</span> <span class="attr">content</span>=<span class="string">"webkit"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--如果安装了GCF，则使用GCF来渲染页面，如果没有安装GCF，则使用最高版本的IE内核进行渲染。--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>顺序不能调换位置</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现在国产的浏览器也是越来越多，360安全浏览器，360极速浏览器，Uc浏览器等，他们都有一个特点就是采用了‘双核’&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‘双核’：“极速模式”和”兼容模式”&lt;br&gt;–极速模式：采用的是谷歌的wekit内核，速度快&lt;br&gt;–兼容模式：采用的
+    
+    </summary>
+    
+      <category term="web" scheme="http://atomjaylee.github.io/categories/web/"/>
+    
+    
+      <category term="360浏览器" scheme="http://atomjaylee.github.io/tags/360%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+  </entry>
+  
+</feed>

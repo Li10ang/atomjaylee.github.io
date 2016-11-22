@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>日常git命令 · JayLee | Blog</title><meta name="description" content="日常git命令 - Lee"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/logo.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://atomjaylee.github.io/atom.xml" title="JayLee | Blog"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/atomjaylee" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">日常git命令</h1><div class="post-info">Aug 4, 2016</div><div class="post-content"><blockquote>
+<p>日常使用git一般借助 tortoisegit/sourcetree等图形界面操作git，但为了逼格也需要知道最常用的git命令</p>
+</blockquote>
+<ul>
+<li><p><code>git init</code>将文件夹变成git仓库</p>
+</li>
+<li><p>add到暂缓区</p>
+<ul>
+<li><code>git add readme.md</code>添加单个文件</li>
+<li><code>git add .</code>添加所有的文件(不包括空文件夹)</li>
+<li><code>git add *.md</code>添加所有的.md文件</li>
+<li><code>git add -A</code>添加所有状态的文件</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p><code>git status</code>查看是否有文件没有提交到暂缓区</p>
+<ul>
+<li>如果未提交文件,运行<code>git diff readme.md</code>查看修改了什么</li>
+</ul>
+</li>
+<li><p><code>git commit -m &#39;说明&#39; -a</code>提交全部文件的说明</p>
+</li>
+<li><p><code>git commit -m &#39;说明&#39; -readme.md</code>提交单个文件的说明</p>
+</li>
+<li><p><code>git log --pretty=oneline</code>将历史提交版本在一行显示出来</p>
+</li>
+<li><p><code>git reset --hard HEAD~1</code>或者<code>git reset --hard HEAD^</code>进行版本的回退</p>
+</li>
+<li><p><code>git remote add origin http://github.com/Lee908105576/XXXX.git</code>添加github上的版本库地址</p>
+</li>
+<li><p><code>git push -u origin master</code>提交到远程版本库并和版本库关联在一起</p>
+</li>
+<li><p><code>git branch dev</code>创建dev分支，是从master分出来的(里面的内容相同)</p>
+</li>
+<li><code>git checkout dev</code>切换到dev分支</li>
+<li><code>git merge dev</code>在当前的分支上合并dev分支</li>
+<li><code>git branch -d dev</code>删除dev分支</li>
+<li><code>git branch</code>查看现在有哪些分支.</li>
+</ul>
+<blockquote>
+<p>如果你对 Git 感兴趣，可以通过<a href="http://iissnan.com/progit/" target="_blank" rel="external">Pro Git</a>这本书来学习,或者看阮一峰老师的 <a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html?utm_source=tool.lu" target="_blank" rel="external">常用 Git 命令清单</a></p>
+</blockquote>
+<p><img src="http://o9z96lbmh.bkt.clouddn.com/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.jpg" alt=""></p>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/08/04/激活webstorm/" class="prev">PREV</a><a href="/2016/08/04/build-first-blog/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2016 <a href="http://atomjaylee.github.io">Lee</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
